@@ -18,6 +18,6 @@ RUN apt-get update  \
 RUN pip install --upgrade pip 
 RUN pip install awscli==${AWSCLI} 
 
-User jenkins
+#User jenkins
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
