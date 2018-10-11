@@ -7,7 +7,7 @@ ENV AWSCLI=1.15.66
 
 
 RUN apt-get update  \
-  && apt-get install -y python-pip curl apt-transport-https ca-certificates bash gnupg2 software-properties-common xmlstarlet \
+  && apt-get install -y python-pip curl apt-transport-https ca-certificates bash gnupg2 software-properties-common xmlstarlet gettext \
   && chown 1000 ~/ \
   && wget -q https://storage.googleapis.com/kubernetes-release/release/${KUBE_RUNNING_VERSION}/bin/linux/amd64/kubectl -O /usr/local/bin/kubectl \ 
   && chmod +x /usr/local/bin/kubectl \ 
