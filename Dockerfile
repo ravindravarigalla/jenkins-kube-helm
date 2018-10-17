@@ -14,7 +14,13 @@ RUN apt-get update  \
   && wget -q https://storage.googleapis.com/kubernetes-release/release/${KUBE_LATEST_VERSION}/bin/linux/amd64/kubectl -O /usr/local/bin/kubectl_latest \
   && chmod +x /usr/local/bin/kubectl_latest \ 
   && wget -q http://storage.googleapis.com/kubernetes-helm/helm-${HELM_VERSION}-linux-amd64.tar.gz -O - | tar -xzO linux-amd64/helm > /usr/local/bin/helm \
-  && chmod +x /usr/local/bin/helm 
+  && chmod +x /usr/local/bin/helm
+RUN curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID")/gpg | apt-key add - && \ 
+   add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") \
+   $(lsb_release -cs) \
+   stable" && \
+   apt-get update && apt-get -y install docker-ce 
 RUN pip install --upgrade pip 
 RUN pip install awscli==${AWSCLI} 
 
