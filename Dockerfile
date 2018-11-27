@@ -9,6 +9,9 @@ ENV AWSCLI=1.15.66
 RUN apt-get update  \
   && apt-get install -y python-pip curl apt-transport-https ca-certificates bash gnupg2 software-properties-common xmlstarlet gettext jq \
   && chown 1000 ~/ \
+  && wget -q https://dl.bintray.com/qameta/generic/io/qameta/allure/allure/2.7.0/allure-2.7.0.tgz \
+  && tar -xzvf allure-2.7.0.tgz \
+  && mv allure-2.7.0 /opt/ \
   && wget -q https://storage.googleapis.com/kubernetes-release/release/${KUBE_RUNNING_VERSION}/bin/linux/amd64/kubectl -O /usr/local/bin/kubectl \ 
   && chmod +x /usr/local/bin/kubectl \ 
   && wget -q https://storage.googleapis.com/kubernetes-release/release/${KUBE_LATEST_VERSION}/bin/linux/amd64/kubectl -O /usr/local/bin/kubectl_latest \
@@ -22,9 +25,9 @@ RUN curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID"
    stable" && \
    apt-get update && apt-get -y install docker-ce 
 RUN pip install --upgrade pip 
-RUN pip install awscli==${AWSCLI} 
+RUN pip install requests awscli==${AWSCLI} 
 
-USER jenkins
+#USER jenkins
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
 RUN echo 2.0 > /usr/share/jenkins/ref/jenkins.install.UpgradeWizard.state
