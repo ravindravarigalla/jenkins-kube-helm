@@ -1,14 +1,26 @@
 FROM jenkins/jenkins
+LABEL maintainer="martin@ventx.de,hajo@ventx.de"
+
 USER root
 ENV KUBE_LATEST_VERSION="v1.11.6"
 ENV KUBE_RUNNING_VERSION="v1.11.6"
 ENV HELM_VERSION="v2.11.0"
-ENV AWSCLI=1.15.66
+ENV AWSCLI=1.16.95
 
 
-RUN apt-get update  \
-  && apt-get install -y python-pip curl apt-transport-https ca-certificates bash gnupg2 software-properties-common xmlstarlet gettext jq \
-  && chown 1000 ~/ \
+RUN apt-get -qq -y update && apt-get -qq -y install \
+    python-pip \
+    curl \
+    apt-transport-https \
+    ca-certificates \
+    bash \
+    gnupg2 \
+    software-properties-common \
+    xmlstarlet \
+    gettext \
+    jq
+
+RUN chown 1000 ~/ \
   && wget -q https://dl.bintray.com/qameta/generic/io/qameta/allure/allure/2.7.0/allure-2.7.0.tgz \
   && tar -xzvf allure-2.7.0.tgz \
   && mv allure-2.7.0 /opt/ \
@@ -23,7 +35,7 @@ RUN curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID"
    "deb [arch=amd64] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") \
    $(lsb_release -cs) \
    stable" && \
-   apt-get update && apt-get -y install docker-ce 
+   apt-get -qq update && apt-get -qq -y install docker-ce 
 RUN pip install --upgrade pip 
 RUN pip install requests awscli==${AWSCLI} 
 
