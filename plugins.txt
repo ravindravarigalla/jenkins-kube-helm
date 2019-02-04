@@ -19,7 +19,7 @@ durable-task:1.28
 email-ext:2.63
 git-client:2.7.6
 git-server:1.7
-git:3.9.1
+git:4.0.0-rc
 github-api:1.95
 github-branch-source:2.4.2
 github:1.29.3
