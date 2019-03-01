@@ -2,10 +2,10 @@ FROM jenkins/jenkins
 LABEL maintainer="martin@ventx.de,hajo@ventx.de"
 
 USER root
-ENV KUBE_LATEST_VERSION="v1.11.6"
-ENV KUBE_RUNNING_VERSION="v1.11.6"
-ENV HELM_VERSION="v2.11.0"
-ENV AWSCLI=1.16.114
+ENV KUBE_LATEST_VERSION v1.11.6
+ENV KUBE_RUNNING_VERSION v1.11.6
+ENV HELM_VERSION v2.11.0
+ENV AWSCLI 1.16.115
 
 
 RUN apt-get -qq -y update && apt-get -qq -y install \
