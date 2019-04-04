@@ -5,7 +5,7 @@ USER root
 ENV KUBE_LATEST_VERSION v1.11.6
 ENV KUBE_RUNNING_VERSION v1.11.6
 ENV HELM_VERSION v2.13.0
-ENV AWSCLI 1.16.125
+ENV AWSCLI 1.16.138
 
 
 RUN apt-get -qq -y update && apt-get -qq -y install \
