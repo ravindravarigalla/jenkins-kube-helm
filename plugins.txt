@@ -35,3 +35,4 @@ prometheus:2.0.0
 metrics:4.0.2.3
 slack:2.23
 blueocean:1.14.0
+configuration-as-code:1.13
