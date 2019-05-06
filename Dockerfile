@@ -5,19 +5,19 @@ USER root
 ENV KUBE_LATEST_VERSION v1.13.4
 ENV KUBE_RUNNING_VERSION v1.11.6
 ENV HELM_VERSION v2.13.1
-ENV AWSCLI 1.16.146
+ENV AWSCLI 1.16.152
 
 RUN apt-get -qq -y update && apt-get -qq -y install \
-    python-pip \
-    curl \
     apt-transport-https \
-    ca-certificates \
     bash \
-    gnupg2 \
-    software-properties-common \
-    xmlstarlet \
+    ca-certificates \
+    curl \
     gettext \
-    jq
+    gnupg2 \
+    jq \
+    python-pip \
+    software-properties-common \
+    xmlstarlet
 
 RUN chown 1000 ~/ \
   && wget -q https://dl.bintray.com/qameta/generic/io/qameta/allure/allure/2.7.0/allure-2.7.0.tgz \
@@ -29,16 +29,19 @@ RUN chown 1000 ~/ \
   && chmod +x /usr/local/bin/kubectl_latest \ 
   && wget -q http://storage.googleapis.com/kubernetes-helm/helm-${HELM_VERSION}-linux-amd64.tar.gz -O - | tar -xzO linux-amd64/helm > /usr/local/bin/helm \
   && chmod +x /usr/local/bin/helm
+
 RUN curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID")/gpg | apt-key add - && \ 
    add-apt-repository \
    "deb [arch=amd64] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") \
    $(lsb_release -cs) \
    stable" && \
    apt-get -qq update && apt-get -qq -y install docker-ce 
+
 RUN pip install --upgrade pip 
+
 RUN pip install requests awscli==${AWSCLI} 
 
 #USER jenkins
-COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
+#COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
 RUN echo 2.0 > /usr/share/jenkins/ref/jenkins.install.UpgradeWizard.state
