@@ -5,7 +5,7 @@ USER root
 ENV KUBE_LATEST_VERSION v1.13.4
 ENV KUBE_RUNNING_VERSION v1.11.6
 ENV HELM_VERSION v2.13.1
-ENV AWSCLI 1.16.152
+ENV AWSCLI 1.16.164
 
 RUN apt-get -qq -y update && apt-get -qq -y install \
     apt-transport-https \
