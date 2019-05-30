@@ -1,7 +1,7 @@
-blueocean:1.16.0
-configuration-as-code:1.13
-configuration-as-code-support::1.13
-google-login:1.4
-kubernetes:1.15.2
-matrix-auth:2.4.2
-prometheus:2.0.0
+blueocean:latest
+configuration-as-code:1.17
+configuration-as-code-support::1.17
+kubernetes:latest
+prometheus:latest
+role-strategy:2.11
+saml:1.1.2
