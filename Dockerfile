@@ -4,7 +4,7 @@ LABEL maintainer="martin@ventx.de,hajo@ventx.de"
 USER root
 ENV KUBE_LATEST_VERSION v1.16.2
 ENV KUBE_RUNNING_VERSION v1.16.8
-ENV HELM_VERSION v3.2.0
+ENV HELM_VERSION v3.2.3
 ENV AWSCLI 1.18.51
 
 RUN apt-get -qq -y update && apt-get -qq -y install \
