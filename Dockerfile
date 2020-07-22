@@ -3,9 +3,9 @@ LABEL maintainer="martin@ventx.de,hajo@ventx.de"
 
 USER root
 ENV KUBE_LATEST_VERSION v1.18.6
-ENV KUBE_RUNNING_VERSION v1.17.7
+ENV KUBE_RUNNING_VERSION v1.17.8
 ENV HELM_VERSION v3.2.4
-ENV AWSCLI 1.18.100
+ENV AWSCLI 1.18.102
 
 RUN apt-get -qq -y update && apt-get -qq -y install \
     apt-transport-https \
