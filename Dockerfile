@@ -2,10 +2,9 @@ FROM jenkins/jenkins
 LABEL maintainer="martin@ventx.de,hajo@ventx.de"
 
 USER root
-ENV KUBE_LATEST_VERSION v1.18.6
-ENV KUBE_RUNNING_VERSION v1.17.8
+ENV KUBE_VERSION v1.18.8
 ENV HELM_VERSION v3.2.4
-ENV AWSCLI 1.18.113
+ENV AWSCLI 1.18.123
 
 RUN apt-get -qq -y update && apt-get -qq -y install \
     apt-transport-https \
@@ -23,10 +22,8 @@ RUN chown 1000 ~/ \
   && wget -q https://dl.bintray.com/qameta/generic/io/qameta/allure/allure/2.7.0/allure-2.7.0.tgz \
   && tar -xzvf allure-2.7.0.tgz \
   && mv allure-2.7.0 /opt/ \
-  && wget -q https://storage.googleapis.com/kubernetes-release/release/${KUBE_RUNNING_VERSION}/bin/linux/amd64/kubectl -O /usr/local/bin/kubectl \ 
+  && wget -q https://storage.googleapis.com/kubernetes-release/release/${KUBE_VERSION}/bin/linux/amd64/kubectl -O /usr/local/bin/kubectl \ 
   && chmod +x /usr/local/bin/kubectl \ 
-  && wget -q https://storage.googleapis.com/kubernetes-release/release/${KUBE_LATEST_VERSION}/bin/linux/amd64/kubectl -O /usr/local/bin/kubectl_latest \
-  && chmod +x /usr/local/bin/kubectl_latest \ 
   && wget -q https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz -O - | tar -xzO linux-amd64/helm > /usr/local/bin/helm \
   && chmod +x /usr/local/bin/helm
 
